@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>ファイルアップロードとトークン生成</title> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script> 
+</head> 
+<body> 
+  <h1>ファイルアップロードとトークン生成</h1> 
+ 
+  <input type="file" id="fileInput"> 
+  <button id="uploadButton">アップロード</button> 
+ 
+  <div id="output"></div> 
+ 
+  <script> 
+    const fileInput = document.getElementById('fileInput'); 
+    const uploadButton = document.getElementById('uploadButton'); 
+    const outputDiv = document.getElementById('output'); 
+ 
+    uploadButton.addEventListener('click', () => { 
+      const file = fileInput.files[0]; 
+ 
+      // トークンの生成 (例: ランダムな文字列) 
+      const token = generateToken(); 
+ 
+      // ファイルをサーバーに送信 (例: AJAX) 
+      const formData = new FormData(); 
+      formData.append('file', file); 
+      formData.append('token', token); 
+      fetch('/upload', { 
+        method: 'POST', 
+        body: formData 
+      }) 
+      .then(response => { 
+        if (response.ok) { 
+          outputDiv.innerHTML = `ファイルがアップロードされました。アクセスURL: https://example.com/${token}`; 
+        } else { 
+          outputDiv.innerHTML = 'ファイルのアップロードに失敗しました。'; 
+        } 
+      }) 
+      .catch(error => { 
+        outputDiv.innerHTML = 'ファイルのアップロードに失敗しました。'; 
+      }); 
+    }); 
+ 
+    // トークンの生成 (例: ランダムな文字列) 
+    function generateToken() { 
+      return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
+    } 
+  </script> 
+</body> 
+</html>
