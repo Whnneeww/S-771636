@@ -1,0 +1,17 @@
+{
+  "name": "otws",
+  "description": "my first package ever",
+  "license": "MIT",
+  "version": "1.0.0",
+  "bin": "./cli.js",
+  "main": "index.html",
+  "scripts": {
+    "start": "node Node.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1"
+  }
+}
